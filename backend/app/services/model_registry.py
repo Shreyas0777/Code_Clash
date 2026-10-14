@@ -17,9 +17,22 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+# Colab / scikit-learn unpickling compatibility:
+# In models serialized with scikit-learn 1.6 on Linux (e.g. Google Colab),
+# CyHalfSquaredError references '_loss' instead of 'sklearn._loss._loss'.
+# Provide a safe module alias so the genuine trained HistGradientBoostingRegressor
+# loads cleanly across environments without modifying the serialized binary.
+try:
+    import sklearn._loss._loss
+    if "_loss" not in sys.modules:
+        sys.modules["_loss"] = sklearn._loss._loss
+except (ImportError, AttributeError):
+    pass
 
 import joblib
 
@@ -86,6 +99,17 @@ def _safe_file_hash(path: Path) -> Optional[str]:
             for chunk in iter(lambda: handle.read(1 << 20), b""):
                 digest.update(chunk)
         return f"sha256-{digest.hexdigest()[:12]}"
+    except OSError:
+        return None
+
+
+def _safe_full_sha256(path: Path) -> Optional[str]:
+    try:
+        digest = hashlib.sha256()
+        with path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1 << 20), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
     except OSError:
         return None
 
@@ -345,6 +369,10 @@ class ModelRegistry:
             },
         )
         metadata: Dict[str, Any] = {}
+        full_hash = _safe_full_sha256(path)
+        if full_hash:
+            metadata["sha256_full"] = full_hash
+        metadata["training_library"] = "scikit-learn 1.6.1 (Google Colab)"
         for key in (
             "training_period_start",
             "training_period_end",
