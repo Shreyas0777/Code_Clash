@@ -14,6 +14,7 @@ __pycache__/
 # Model binaries & archives — kept out of Git (see backend/artifacts/README.md)
 backend/artifacts/*
 !backend/artifacts/README.md
+backend/app/tests/fixtures/
 *.joblib
 *.pkl
 *.pickle
