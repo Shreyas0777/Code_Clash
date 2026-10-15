@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Sequence, Tuple
+from typing import Sequence, Tuple
 
 from ..schemas.energy import EnergyStats
 

@@ -45,9 +45,10 @@ python -m pytest app/tests -q
 ```
 
 Tests use **synthetic fixtures only** (marked in `conftest.py`); no dataset
-and no real artifacts are required. The single integration test that needs
-real artifacts (`test_real_artifacts_load_and_ready_reports_ok`) auto-skips
-while the artifacts are absent.
+and no real artifacts are required. The integration tests that need the
+genuine Colab export (the registry smoke test plus the 7 checksum-pinned
+tests in `test_real_artifacts_integration.py`) auto-skip while the artifacts
+are absent.
 
 ### Docker
 
@@ -55,7 +56,15 @@ while the artifacts are absent.
 cd backend
 docker build -t fluxora-api .
 docker run --rm -p 8000:8000 -v "$(pwd)/artifacts:/app/artifacts:ro" fluxora-api
+
+# or, equivalently:
+docker compose up --build
 ```
+
+Artifacts are **mounted at runtime, never baked into the image** (enforced by
+both the Dockerfile and `.dockerignore`), so the build succeeds on any clone.
+Without artifacts the container still starts; `/ready` reports degraded.
+Configured with `hadolint` (clean) and `docker-compose` port/volume checks.
 
 ---
 
@@ -72,9 +81,12 @@ backend/artifacts/
 └── forecast_metrics.json     # optional
 ```
 
-Then restart and verify:
+Then install and verify:
 
 ```bash
+python scripts/install_artifacts.py path/to/fluxora_trained_models.zip
+# verifies the SHA-256 checksums pinned by the real-artifact tests,
+# refuses overwrites without --force
 curl http://127.0.0.1:8000/api/v1/ready   # expect "ready": true
 ```
 
@@ -139,7 +151,7 @@ Base path: **`/api/v1`**. All bodies are JSON. All errors share one envelope:
 | `413` | body exceeds `MAX_REQUEST_BYTES` |
 | `422` | schema/validation failure, unsupported horizon, insufficient history, missing emission-factor config |
 | `503` | required model artifact unavailable (structured `error.code`) |
-| `500` | unexpected error (message only; details in server logs) |
+| `500` | unexpected error or `model_inference_failed` (message only; details in server logs) |
 
 ### `GET /api/v1/health` — liveness
 
@@ -421,8 +433,8 @@ backend/
 │   │   ├── forecast_service.py # training-faithful features, leakage guards
 │   │   ├── carbon_service.py # factor provenance enforcement
 │   │   └── scenario_service.py # deterministic math
-│   ├── utils/                # hourly grid + interpolation · metrics helpers
-│   └── tests/                # 75 tests, synthetic fixtures only
+│   ├── utils/                # hourly grid + interpolation
+│   └── tests/                # 85 tests, synthetic fixtures only
 ├── artifacts/                # drop-in model dir (binaries git-ignored)
 ├── scripts/train_demo_artifacts.py  # clearly-labeled SYNTHETIC demo models
 ├── requirements.txt  .env.example  Dockerfile  README.md
@@ -431,7 +443,9 @@ backend/
 Design decisions: models load **once** in the lifespan (no retraining, no
 downloads, no request-time file loads); inference lives in services shared by
 routes; every data transformation that alters input is surfaced as a
-`warnings[]` entry; detailed diagnostics go to structured stdout logs only.
+`warnings[]` entry; model-inference failures return a structured 500
+(`model_inference_failed`) while diagnostics stay in server logs only;
+detailed diagnostics go to structured stdout logs only.
 
 ---
 
@@ -440,12 +454,19 @@ routes; every data transformation that alters input is surfaced as a
 - Training notebook: `fluxora_model_training..ipynb` (repo root) — BDG2
   `electricity.csv`, meter `Robin_public_Carolina`, 17,544 hourly readings
   2016–2017, chronological 80/20 splits.
-- Notebook dependencies were installed **unpinned** in Colab, so the
-  scikit-learn version of the existing export is **unknown**. If
-  `joblib.load` fails on the real files (version mismatch), re-export the
-  artifacts in an environment with `scikit-learn==1.9.1` (this project's
-  pin) or align `requirements.txt` with the training environment — the
-  registry reports `model_artifact_invalid` in `/ready` when this happens.
+- Training environment is now recorded: **scikit-learn 1.6.1 (Google
+  Colab)**, established by the real-model integration PR and pinned there by
+  exact SHA-256 checksums of the genuine artifacts. The registry includes a
+  cross-platform pickle-compat shim (`sys.modules["_loss"]`) so models
+  serialized on Colab Linux unpickle cleanly elsewhere. `model_config.json`
+  may carry an optional `training_library` key, which the registry surfaces
+  and prefers; synthetic-flagged configs never claim the Colab environment.
+- This project pins `scikit-learn==1.6.1` — the artifact training version —
+  so the genuine artifacts unpickle with **zero version warnings** (verified
+  by loading both models with `warnings.simplefilter("error")`). If
+  `joblib.load` ever fails on the real files (deeper version mismatch),
+  re-export the artifacts with the pinned version — the registry reports
+  `model_artifact_invalid` in `/ready` when this happens.
 - The backend validates on load: file readability, `IsolationForest` /
   `HistGradientBoostingRegressor` class, feature-name compatibility with the
   exported `model_config.json`, and feature-count consistency. Mismatches
@@ -458,8 +479,10 @@ routes; every data transformation that alters input is surfaced as a
 
 1. **Model artifacts are not in the repository** — forecast/anomaly endpoints
    run in 503-degraded mode until the ZIP is placed (audit: `docs/AUDIT_AND_PLAN.md`).
-2. Training-time sklearn version unknown; compatibility not yet verified
-   against the real export.
+2. Training environment is recorded (scikit-learn 1.6.1, Colab) and a
+   pickle-compat shim is in place, but end-to-end compatibility is proven
+   only by the checksum-pinned integration tests — which run solely when the
+   genuine artifacts are present in `backend/artifacts/`.
 3. Naive timestamps are interpreted as UTC; callers should send offsets (`Z`).
 4. Single meter/time series per request; no database, auth, or persistence
    (intentionally lightweight — nothing in the app requires them).

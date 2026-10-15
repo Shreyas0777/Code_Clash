@@ -1,0 +1,26 @@
+# Fluxora API — container orchestration
+#
+# Usage:
+#   docker compose up --build
+#
+# Model artifacts are mounted read-only from ./artifacts (git-ignored;
+# see artifacts/README.md). Without them the API still starts and serves
+# /health and /ready, and /ready reports 503 degraded for the model routes.
+#
+# To configure the carbon endpoints, add an environment section, e.g.:
+#   environment:
+#     CARBON_EMISSION_FACTOR: "0.42"
+#     CARBON_FACTOR_SOURCE: "EPA eGRID 2021"
+#     CARBON_FACTOR_REGION: "US"
+#     CARBON_FACTOR_UNITS: "kg_CO2_per_kwh"
+
+services:
+  api:
+    build: .
+    image: fluxora-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts:/app/artifacts:ro
+    restart: unless-stopped
+    # Healthcheck is inherited from the image (HEALTHCHECK in Dockerfile).

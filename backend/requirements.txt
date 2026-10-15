@@ -2,6 +2,10 @@
 # (Python 3.13.15). Re-verify with `pip install -r requirements.txt && pytest`
 # after changing any pin.
 #
+# NOTE: scikit-learn is pinned to the ARTIFACT TRAINING version (1.6.1,
+# Google Colab) so the genuine BDG2 artifacts unpickle without
+# InconsistentVersionWarning. Do not bump without re-exporting artifacts.
+#
 # ML / API runtime
 fastapi==0.141.1
 uvicorn==0.52.4
@@ -10,7 +14,7 @@ pydantic-settings==2.15.0
 python-dotenv==1.2.3
 numpy==2.5.3
 pandas==3.0.6
-scikit-learn==1.9.1
+scikit-learn==1.6.1
 joblib==1.6.0
 
 # Testing (httpx is the transport behind fastapi.testclient.TestClient)

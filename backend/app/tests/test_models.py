@@ -116,6 +116,41 @@ def test_registry_require_raises_503_for_missing(tmp_path):
     assert str(tmp_path) not in excinfo.value.message
 
 
+def test_training_library_metadata_is_conditional(
+    tmp_path, tiny_anomaly_model, tiny_forecast_model
+):
+    """Only genuine exports may claim the Colab training environment."""
+    joblib.dump(tiny_anomaly_model, tmp_path / "anomaly_model.joblib")
+    joblib.dump(tiny_forecast_model, tmp_path / "forecast_model.joblib")
+
+    # Genuine-style config without an explicit key → known Colab default.
+    _write_config(tmp_path, dict(BASE_CONFIG))
+    registry = ModelRegistry(tmp_path)
+    registry.load()
+    assert (
+        registry.get("anomaly").metadata["training_library"]
+        == "scikit-learn 1.6.1 (Google Colab)"
+    )
+
+    # Synthetic-flagged config must NEVER claim Colab training.
+    _write_config(tmp_path, {**BASE_CONFIG, "synthetic": True})
+    registry = ModelRegistry(tmp_path)
+    registry.load()
+    assert "training_library" not in registry.get("anomaly").metadata
+
+    # A config-declared value always wins.
+    _write_config(
+        tmp_path,
+        {**BASE_CONFIG, "training_library": "scikit-learn 1.9.1 (pinned env)"},
+    )
+    registry = ModelRegistry(tmp_path)
+    registry.load()
+    assert (
+        registry.get("anomaly").metadata["training_library"]
+        == "scikit-learn 1.9.1 (pinned env)"
+    )
+
+
 def test_endpoints_503_when_models_missing(degraded_registry):
     settings = make_settings()
     with make_client(settings=settings, registry=degraded_registry) as client:
@@ -145,7 +180,7 @@ def test_endpoints_503_when_models_missing(degraded_registry):
 # --------------------------------------------------------------------------
 @pytest.mark.skipif(
     not REAL_ARTIFACTS_PRESENT,
-    reason="trained BDG2 artifacts not present in backend/artifacts/ (synthetic demo files are excluded)",
+    reason="trained BDG2 artifacts not present in backend/artifacts/ (synthetic demo files are excluded; install with: python scripts/install_artifacts.py <zip>)",
 )
 def test_real_artifacts_load_and_ready_reports_ok():
     settings = make_settings(model_artifacts_dir=ARTIFACTS_DIR)

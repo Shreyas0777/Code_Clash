@@ -14,6 +14,7 @@ rejected with an explicit error instead of silently extrapolating.
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import List
@@ -23,8 +24,10 @@ import pandas as pd
 from ..core.exceptions import AppError, InsufficientHistoryError
 from ..schemas.common import DataQualityWarning, ValidatedReadings
 from .model_registry import ModelEntry
-from .data_validation import normalize_readings
+from .data_validation import check_readings_count, normalize_readings
 from ..utils.timestamps import hourly_grid_series
+
+logger = logging.getLogger("fluxora.forecast_service")
 
 SUPPORTED_HORIZON_HOURS = 1
 REQUIRED_HISTORY_HOURS = 168  # lag_168 from the training feature set
@@ -171,7 +174,23 @@ def predict_next_hour(
         dtype="float64",
     )
 
-    prediction = entry.model.predict(frame)[0]
+    try:
+        prediction = entry.model.predict(frame)[0]
+    except Exception:
+        # Diagnostics stay in server logs; the client gets a safe message.
+        logger.exception(
+            "forecast_inference_failed",
+            extra={"event": "forecast_inference_failed", "model_version": entry.version},
+        )
+        raise AppError(
+            code="model_inference_failed",
+            message=(
+                "Forecast inference failed on the loaded model. See server logs "
+                "for diagnostics; the artifact may be incompatible with this "
+                "environment."
+            ),
+            status_code=500,
+        ) from None
     predicted = float(prediction)
     if not pd.notna(predicted):
         raise AppError(
@@ -200,8 +219,6 @@ def forecast_from_raw(
     max_readings: int,
 ) -> ForecastOutcome:
     """Convenience wrapper used by the route: validate then predict."""
-    from .data_validation import check_readings_count
-
     check_readings_count(len(raw_readings), max_readings)
     validated = normalize_readings(raw_readings)
     return predict_next_hour(validated, entry, horizon_hours)

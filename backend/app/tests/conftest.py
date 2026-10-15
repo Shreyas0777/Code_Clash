@@ -135,6 +135,16 @@ def synthetic_hourly_readings(hours: int = 24 * 30, start: Optional[datetime] = 
     return readings
 
 
+class ExplodingModel:
+    """SYNTHETIC test double whose inference always fails (error-path tests)."""
+
+    def predict(self, frame):  # noqa: ARG002 - deliberately fails
+        raise RuntimeError("simulated model failure")
+
+    def score_samples(self, frame):  # noqa: ARG002 - deliberately fails
+        raise RuntimeError("simulated model failure")
+
+
 @pytest.fixture
 def readings_720h():
     """SYNTHETIC: 30 days of hourly readings."""

@@ -10,8 +10,6 @@ carry source, region and units (year / effective date when available).
 
 from __future__ import annotations
 
-from typing import List
-
 from ..core.config import CARBON_FACTOR_UNITS_SUPPORTED, Settings
 from ..core.exceptions import ConfigurationError
 from ..schemas.carbon import CarbonSummaryRequest, CarbonSummaryResponse, EmissionFactorInfo

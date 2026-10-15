@@ -12,11 +12,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import numpy as np
-import pandas as pd
 import pytest
 
 from app.core.config import Settings
-from app.schemas.common import Reading
+from app.schemas.energy import Reading
 from app.services.anomaly_service import build_feature_frame
 from app.services.forecast_service import predict_next_hour
 from app.services.model_registry import ModelRegistry
@@ -54,7 +53,8 @@ def _real_artifacts_present() -> bool:
 
 pytestmark = pytest.mark.skipif(
     not _real_artifacts_present(),
-    reason="Genuine BDG2 model artifacts not present in backend/artifacts/",
+    reason="Genuine BDG2 model artifacts not present in backend/artifacts/ "
+    "(install with: python scripts/install_artifacts.py <zip>)",
 )
 
 

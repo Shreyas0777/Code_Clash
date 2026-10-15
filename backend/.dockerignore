@@ -1,0 +1,23 @@
+# Keep the build context lean and prevent secrets or local binaries from
+# ever entering the image or the build daemon's context.
+
+# Model artifacts are mounted at runtime (never baked in)
+artifacts/
+*.joblib
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python caches / virtualenvs
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Logs and OS noise
+*.log
+.DS_Store
+Thumbs.db

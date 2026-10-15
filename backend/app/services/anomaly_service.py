@@ -9,13 +9,17 @@ Feature engineering and output interpretation follow the training notebook:
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+import logging
+from typing import Any, List
 
 import pandas as pd
 
+from ..core.exceptions import AppError
 from ..schemas.anomaly import AnomalyResult
 from ..schemas.common import ValidatedReadings
 from .model_registry import ModelEntry
+
+logger = logging.getLogger("fluxora.anomaly_service")
 
 ANOMALY_INTERPRETATION = (
     "An anomaly flag indicates a reading that is unusual relative to the "
@@ -56,8 +60,24 @@ def detect(
     feature_names = list(entry.feature_names or [])
     frame = build_feature_frame(readings, feature_names)
 
-    raw_labels: Any = entry.model.predict(frame)
-    raw_scores: Any = entry.model.score_samples(frame)
+    try:
+        raw_labels: Any = entry.model.predict(frame)
+        raw_scores: Any = entry.model.score_samples(frame)
+    except Exception:
+        # Diagnostics stay in server logs; the client gets a safe message.
+        logger.exception(
+            "anomaly_inference_failed",
+            extra={"event": "anomaly_inference_failed", "model_version": entry.version},
+        )
+        raise AppError(
+            code="model_inference_failed",
+            message=(
+                "Anomaly inference failed on the loaded model. See server logs "
+                "for diagnostics; the artifact may be incompatible with this "
+                "environment."
+            ),
+            status_code=500,
+        ) from None
     scores = [-float(s) for s in raw_scores]  # score = -score_samples (training rule)
 
     results: List[AnomalyResult] = []
@@ -75,15 +95,3 @@ def detect(
             )
         )
     return results
-
-
-def flagged_readings(results: List[AnomalyResult]) -> List[Dict[str, Any]]:
-    return [
-        {
-            "timestamp": r.timestamp,
-            "energy_kwh": r.energy_kwh,
-            "anomaly_score": r.anomaly_score,
-        }
-        for r in results
-        if r.model_output == -1
-    ]

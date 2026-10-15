@@ -219,7 +219,7 @@ class ModelRegistry:
         if self.config_status != STATUS_LOADED:
             # Without the exported config we cannot know the training-time
             # feature contract, so models are treated as unusable.
-            for name, spec in MODEL_SPECS.items():
+            for name in MODEL_SPECS:
                 entry = ModelEntry(
                     name=name,
                     status=STATUS_CONFIG_MISSING,
@@ -372,7 +372,18 @@ class ModelRegistry:
         full_hash = _safe_full_sha256(path)
         if full_hash:
             metadata["sha256_full"] = full_hash
-        metadata["training_library"] = "scikit-learn 1.6.1 (Google Colab)"
+        # Training-environment provenance: prefer what the exported config
+        # declares. Fall back to the known Colab training environment only
+        # for genuine (non-synthetic) exports — synthetic demo/test fixtures
+        # must never claim to be Colab-trained.
+        is_synthetic = self.config.get("synthetic") is True or str(
+            self.config.get("artifact_source", "")
+        ).startswith("synthetic")
+        config_library = self.config.get("training_library")
+        if isinstance(config_library, str) and config_library:
+            metadata["training_library"] = config_library
+        elif not is_synthetic:
+            metadata["training_library"] = "scikit-learn 1.6.1 (Google Colab)"
         for key in (
             "training_period_start",
             "training_period_end",

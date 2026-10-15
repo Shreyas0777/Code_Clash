@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import pandas as pd
 
 from .conftest import (
     FORECAST_FEATURES,
+    ExplodingModel,
+    fixture_registry,
     make_client,
-    make_settings,
     synthetic_hourly_readings,
 )
 
@@ -142,3 +143,18 @@ def test_forecast_input_period_reported(loaded_registry, readings_720h):
     assert body["input_period"]["start"] == "2026-01-05T00:00:00"
     assert body["input_period"]["end"] == "2026-02-03T23:00:00"
     assert body["forecast_timestamp"] == "2026-02-04T00:00:00"
+
+
+def test_forecast_inference_failure_returns_structured_500(
+    readings_720h, tiny_anomaly_model
+):
+    """A model whose predict() raises yields a safe 500, never a leaked traceback."""
+    registry = fixture_registry(tiny_anomaly_model, ExplodingModel())
+    payload = {"meter_id": "m", "readings": readings_720h}
+    with make_client(registry=registry) as client:
+        response = client.post("/api/v1/forecast", json=payload)
+    assert response.status_code == 500
+    body = response.json()
+    assert body["error"]["code"] == "model_inference_failed"
+    assert "simulated model failure" not in response.text
+    assert "Traceback" not in response.text

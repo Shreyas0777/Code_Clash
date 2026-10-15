@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 
-from .conftest import ANOMALY_FEATURES, make_client
+from .conftest import ANOMALY_FEATURES, ExplodingModel, fixture_registry, make_client
 
 
 BASE = datetime(2026, 3, 2, 10, 0)  # 10:00, matched to training-time hour feature
@@ -116,3 +116,16 @@ def test_shared_service_same_labels_as_energy_analyze(loaded_registry):
     flagged = {r["energy_kwh"] for r in detect["results"] if r["model_output"] == -1}
     flagged_analyze = {r["energy_kwh"] for r in analyze["flagged_readings"]}
     assert flagged == flagged_analyze
+
+
+def test_detect_inference_failure_returns_structured_500(tiny_forecast_model):
+    """A failing anomaly model yields a safe 500, never a leaked traceback."""
+    registry = fixture_registry(ExplodingModel(), tiny_forecast_model)
+    readings = [{"timestamp": BASE.isoformat(), "energy_kwh": 100.0}]
+    with make_client(registry=registry) as client:
+        response = client.post("/api/v1/anomalies/detect", json=_payload(readings))
+    assert response.status_code == 500
+    body = response.json()
+    assert body["error"]["code"] == "model_inference_failed"
+    assert "simulated model failure" not in response.text
+    assert "Traceback" not in response.text

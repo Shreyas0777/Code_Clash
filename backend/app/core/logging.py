@@ -11,7 +11,7 @@ import json
 import logging
 import sys
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any
 
 # Attributes present on every LogRecord; anything else is treated as a
 # structured field supplied via ``logger.info("msg", extra={...})``.
@@ -96,5 +96,4 @@ __all__ = [
     "setup_logging",
     "get_logger",
     "log_event",
-    "Optional",
 ]
