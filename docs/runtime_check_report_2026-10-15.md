@@ -82,7 +82,27 @@ and both ports verified closed afterwards. No stray processes.
 3. **Frontend:** there is still **no website code in the repository** — this report verifies
    the backend and its HTTP contract only.
 
-## 7. Repository state
+## 7. Limitation resolutions — multiphase pass (same day)
 
-- Cleanup pass: **22 files modified (+179/−49), uncommitted** — awaiting go-ahead to commit/push.
+Each limitation from §3–6 was worked over in phases; all code phases
+re-verified (final suite: **93 passed, 1 warning, exit 0**; pyflakes clean).
+
+| Limitation | Phase | Resolution | Evidence |
+|---|---|---|---|
+| sklearn 1.6.1→1.9.1 unpickle warning | 1 | Pinned `scikit-learn==1.6.1` (the artifact training version) in `requirements.txt`; README §7 updated | Both genuine models load under `warnings.simplefilter("error")` with **no warning**; suite warnings 9 → 1 (the remaining one is a third-party starlette/anyio deprecation, not project code) |
+| Docker image unbuilt (no Docker) | 2 | Docker/podman re-checked: still absent. Full **static** validation instead: hadolint v2.15.1 (binary SHA-256-verified against official checksums) reports **clean** after fixing DL3025 (JSON-form HEALTHCHECK); `python:3.13-slim` confirmed on Docker Hub; compose YAML parsed with port/volume assertions; every COPY source present; CMD/EXPOSE/HEALTHCHECK agree on port 8000; healthcheck endpoint proven live (§3) | Found and fixed a **real build-blocker**: `COPY artifacts ./artifacts` baked a git-ignored directory, so fresh-clone builds failed — removed; `.dockerignore` + `docker-compose.yml` added (artifacts stay runtime-mounted) |
+| Fresh clones auto-skip 8 real-artifact tests | 3 | New `scripts/install_artifacts.py`: installs the artifact ZIP only if SHA-256 matches the test-pinned checksums; refuses overwrites without `--force`; skip messages now name the installer; docs updated | 8 new tests (round-trip, tamper → exit 3, missing members → exit 2, overwrite → exit 4, nested-folder ZIP, real end-to-end); **real CLI run**: genuine artifacts → exit 0 with both pinned hashes, re-run refused (exit 4) |
+| 22-file cleanup + report uncommitted | 4 | Committed and pushed | `d8d3c8f` on `origin/main` (29 files, +682/−57); working tree clean except intentionally untracked `.freebuff/` |
+
+**Still open (needs Docker installed):** an actual `docker build` /
+`docker compose up` run. Everything statically checkable about the image is
+now verified, and the image's runtime command is the same uvicorn invocation
+proven live in §2–3.
+
+## 8. Repository state
+
+- Latest commit: **`d8d3c8f`** (pushed to `origin/main`); working tree clean
+  except intentionally untracked `.freebuff/`.
 - Servers started for this check were stopped; nothing left running.
+- Artifacts in `backend/artifacts/` are the genuine BDG2 export (hashes
+  `7dd68ffe…` / `00e6bfe3…`), untouched by all phases.
