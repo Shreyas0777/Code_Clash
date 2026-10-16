@@ -1,304 +1,267 @@
-# ⚡ FLUXORA — Intelligence That Powers a Smarter Future
+# ⚡ FLUXORA
+### AI-Powered Energy Intelligence · Computer Vision · Digital Twins
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:050816,35:123B72,70:00D4FF,100:7C3AED&height=250&section=header&text=FLUXORA&fontSize=82&fontColor=FFFFFF&fontAlignY=38&desc=SEE%20ENERGY.%20UNDERSTAND%20ENERGY.%20OPTIMIZE%20ENERGY.&descSize=15&descAlignY=60&animation=fadeIn" width="100%" alt="Fluxora animated futuristic energy banner"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=0:020617,20:0B1F42,45:123B72,70:00D4FF,100:7C3AED&text=F%20L%20U%20X%20O%20R%20A&fontColor=FFFFFF&fontSize=68&fontAlignY=38&desc=INTELLIGENCE%20FOR%20A%20SMARTER%20ENERGY%20FUTURE&descAlignY=58&descSize=13&animation=fadeIn&stroke=00D4FF&strokeWidth=1" width="100%" alt="Fluxora animated energy intelligence banner"/>
 </p>
 
 <p align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=900&color=00D4FF&center=true&vCenter=true&width=780&lines=AI-powered+energy+intelligence.;Computer+Vision+%2B+Digital+Twins.;Turning+visual+insights+into+smarter+decisions.;Building+the+future+of+intelligent+energy." alt="Fluxora animated typing tagline"/>
+  <a href="https://readme-typing-svg.demolab.com/">
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2500&pause=700&color=00D4FF&center=true&vCenter=true&repeat=true&width=820&height=55&lines=SEE+ENERGY+DIFFERENTLY.;COMPUTER+VISION+MEETS+DIGITAL+TWINS.;FROM+VISUAL+DATA+TO+INTELLIGENT+INSIGHTS.;BUILDING+THE+NEXT+GENERATION+OF+ENERGY+INTELLIGENCE." alt="Animated Fluxora tagline"/>
   </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PROJECT-FLUXORA-00D4FF?style=for-the-badge&labelColor=050816" alt="Project Fluxora"/>
-  <img src="https://img.shields.io/badge/AI-COMPUTER%20VISION-7C3AED?style=for-the-badge&labelColor=050816" alt="Computer Vision"/>
-  <img src="https://img.shields.io/badge/INTELLIGENCE-DIGITAL%20TWIN-00C896?style=for-the-badge&labelColor=050816" alt="Digital Twin"/>
-  <img src="https://img.shields.io/badge/FOCUS-ENERGY%20EFFICIENCY-FFB84D?style=for-the-badge&labelColor=050816" alt="Energy efficiency"/>
+  <img src="https://img.shields.io/badge/PROJECT-FLUXORA-00D4FF?style=for-the-badge&labelColor=020617" alt="Fluxora"/>
+  <img src="https://img.shields.io/badge/DOMAIN-ENERGY%20INTELLIGENCE-7C3AED?style=for-the-badge&labelColor=020617" alt="Energy intelligence"/>
+  <img src="https://img.shields.io/badge/CORE-COMPUTER%20VISION-00C896?style=for-the-badge&labelColor=020617" alt="Computer vision"/>
+  <img src="https://img.shields.io/badge/ARCHITECTURE-DIGITAL%20TWIN-FFB84D?style=for-the-badge&labelColor=020617" alt="Digital twin"/>
 </p>
 
 <p align="center">
-  <strong>What if buildings could see their energy problems before those problems became expensive?</strong>
-  <br/>
-  Fluxora is our vision for an intelligent energy system that combines computer vision, energy analytics, and digital-twin integration to help transform building environments into systems that can be understood, monitored, and optimized.
+  <strong>Making energy visible. Making intelligence actionable.</strong>
 </p>
 
 <p align="center">
-  <a href="#-the-big-idea">The Vision</a> •
-  <a href="#-how-fluxora-works">Architecture</a> •
+  <a href="#-abstract">Abstract</a> •
+  <a href="#-the-vision">Vision</a> •
+  <a href="#-system-architecture">Architecture</a> •
+  <a href="#-the-mvp">MVP</a> •
   <a href="#-technology-stack">Tech Stack</a> •
   <a href="#-roadmap">Roadmap</a> •
-  <a href="#-get-started">Get Started</a>
+  <a href="#-getting-started">Get Started</a>
 </p>
 
 ---
 
-## ◈ 00 — The Big Idea
+## ◈ ABSTRACT
 
-Buildings consume energy. But understanding *why* energy is being wasted, where inefficiencies occur, and how a building could operate more intelligently is not always straightforward.
+The growing demand for energy efficiency in modern buildings calls for intelligent systems capable of connecting environmental observations with meaningful, data-informed decisions. **Fluxora** explores an AI-driven approach to energy intelligence through the integration of computer vision, baseline visual analysis, and digital-twin technologies within a modular processing architecture.
 
-Traditional energy monitoring often focuses on readings, reports, and historical consumption. Fluxora explores a complementary approach: **use visual intelligence to understand the environment, connect observations to a digital representation, and build a foundation for smarter energy decisions.**
+The project focuses on developing a reproducible pipeline that processes visual inputs, extracts relevant features, and produces structured outputs suitable for downstream analytics and digital representations of physical environments. Its initial direction establishes a computer-vision baseline, with an architectural pathway toward integrating measured energy data, contextual analysis, and intelligent decision support. By connecting visual perception with digital-twin systems, Fluxora aims to provide a foundation for understanding building environments more contextually and supporting informed energy-management decisions. The effectiveness of the proposed approach and its potential contribution to energy savings require systematic evaluation using appropriate measurements and real-world validation.
 
-<details open>
-<summary><strong>⚡ The Fluxora philosophy</strong></summary>
-
-<br/>
-
-| Conventional approach | The Fluxora direction |
-|:---|:---|
-| Look at energy readings in isolation | Combine visual context with energy information |
-| Review inefficiencies after they occur | Explore opportunities for earlier detection |
-| Work with disconnected observations | Connect perception, analysis, and a digital twin |
-| Rely entirely on manual interpretation | Build toward AI-assisted insights |
-| Treat buildings as static environments | Work toward continuously informed digital representations |
-
-These are the project's design goals, not a claim that every capability is already implemented.
-
-</details>
-
-### ✦ Our mission
-
-> **Make energy visible. Make inefficiencies understandable. Make intelligent optimization possible.**
-
-Fluxora is being developed around a practical foundation: begin with a computer-vision MVP, establish a reproducible processing pipeline, and progressively connect its outputs to a digital-twin workflow.
+**Keywords:** Energy Intelligence, Artificial Intelligence, Computer Vision, Digital Twins, Building Energy Efficiency, Visual Analytics, Energy Optimization.
 
 ---
 
-## ◈ 01 — The Problem We Want to Solve
-
-<details open>
-<summary><strong>01. Energy inefficiencies are difficult to interpret</strong></summary>
-
-Energy consumption numbers tell us what was consumed, but often do not explain the physical context behind a change. Visual information can provide useful context about the environment in which energy is used.
-
-</details>
-
-<details open>
-<summary><strong>02. Visual data needs meaningful interpretation</strong></summary>
-
-Raw images and video frames are not insights. They need preprocessing, feature extraction, analysis, and an output that downstream systems can understand.
-
-</details>
-
-<details open>
-<summary><strong>03. Insights need a place to live</strong></summary>
-
-A computer-vision model alone is not a complete energy-intelligence platform. Its outputs need to be structured so that they can eventually inform a building's digital representation, analytics, and decision-support interfaces.
-
-</details>
-
-<details open>
-<summary><strong>04. Optimization needs trustworthy data</strong></summary>
-
-Any future recommendations should be grounded in measured or validated information. Visual brightness, for example, is not the same as electrical power consumption. Fluxora must distinguish observable visual features from actual energy measurements.
-
-</details>
-
----
-
-## ◈ 02 — How Fluxora Works
+## ◈ 00 — THE VISION
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,2,3&height=3&section=header&animation=fadeIn" width="100%" alt="Section divider"/>
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=80&color=0:020617,50:123B72,100:020617&text=THE%20FUTURE%20OF%20ENERGY%20IS%20INTELLIGENT&fontColor=00D4FF&fontSize=19&animation=fadeIn" width="100%" alt="Fluxora vision banner"/>
 </p>
 
-The system is designed as a pipeline: information enters, computer vision extracts useful signals, the analysis layer produces structured outputs, and the integration layer makes those outputs available for the digital twin.
+**What if buildings could become easier to understand, monitor, and optimize through AI?**
+
+Buildings consume energy every second. Yet energy readings alone do not always explain the physical conditions behind consumption, and visual observations alone cannot establish how much electricity a building uses.
+
+Fluxora explores the space between these two sources of information.
+
+Our approach begins with visual analysis, establishes a structured processing pipeline, and builds toward a system that can connect computer-vision outputs with a digital twin.
+
+### The idea in one line
+
+> **Visual perception → Intelligent analysis → Digital representation → Better-informed energy decisions.**
+
+### The problem
+
+- Energy data can lack the physical context needed to interpret what is happening in a building.
+- Images and video contain information that must be processed before it becomes useful.
+- Isolated AI models do not automatically integrate with building information systems.
+- Energy optimization requires reliable evidence, not assumptions based on visual appearance alone.
+
+### The Fluxora approach
+
+| Traditional workflow | Fluxora's intended direction |
+|---|---|
+| Analyze individual readings | Combine relevant visual and measured information |
+| Interpret images manually | Extract features through computer vision |
+| Keep analysis separate from the environment model | Design structured outputs for digital-twin integration |
+| Investigate inefficiencies after the fact | Explore earlier detection and data-informed analysis |
+| Make decisions from disconnected observations | Work toward contextual, validated energy insights |
+
+These are design goals and intended benefits, not claims that every capability is already operational.
+
+---
+
+## ◈ 01 — SYSTEM ARCHITECTURE
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=3&color=0:00D4FF,50:7C3AED,100:00C896" width="100%" alt="Architecture divider"/>
+</p>
+
+Fluxora is designed around a modular pipeline in which each stage has a clear responsibility. This makes the system easier to develop, test, extend, and integrate.
 
 ```mermaid
 flowchart TD
-    A["📷 Visual Input<br/>Images / Video Frames"] --> B["⚙️ Preprocessing"]
-    B --> C["👁️ Computer Vision<br/>Brightness & Visual Features"]
-    C --> D["📊 Baseline Analysis<br/>Compare & Interpret"]
-    D --> E["📦 Structured Results<br/>Metrics / Metadata"]
-    E --> F["🔗 Integration Layer"]
-    F --> G["🏙️ Digital Twin"]
-    G --> H["📈 Visualization & Analytics"]
-    H --> I["💡 Decision Support<br/>Future Optimization"]
+    A["📷 VISUAL INPUT<br/>Images / Video Frames"]
+    B["⚙️ PREPROCESSING<br/>Input Validation"]
+    C["👁️ COMPUTER VISION<br/>Feature Extraction"]
+    D["📊 BASELINE ANALYSIS<br/>Brightness & Visual Metrics"]
+    E["📦 STRUCTURED OUTPUT<br/>Metrics / Metadata"]
+    F["🔗 INTEGRATION LAYER<br/>Data Contract / Adapter"]
+    G["🏙️ DIGITAL TWIN<br/>Physical Environment Model"]
+    H["📈 ANALYTICS & VISUALIZATION"]
+    I["💡 DECISION SUPPORT<br/>Future Optimization"]
 
-    J["⚡ Energy Meter Data<br/>When Available"] --> K["🔬 Energy Validation"]
+    J["⚡ ENERGY MEASUREMENTS<br/>Meters / Monitoring Systems"]
+    K["🔬 VALIDATION & CORRELATION"]
+
+    A --> B --> C --> D --> E --> F
+    J --> K
+    E --> K
     K --> F
+    F --> G --> H --> I
 
-    classDef input fill:#101C38,stroke:#00D4FF,color:#FFFFFF
-    classDef ai fill:#21134B,stroke:#9B7CFF,color:#FFFFFF
-    classDef data fill:#102D35,stroke:#00D6A0,color:#FFFFFF
-    classDef future fill:#302515,stroke:#FFB84D,color:#FFFFFF
+    classDef input fill:#0B1F42,stroke:#00D4FF,color:#FFFFFF,stroke-width:2px
+    classDef vision fill:#211344,stroke:#A78BFA,color:#FFFFFF,stroke-width:2px
+    classDef data fill:#10352F,stroke:#00C896,color:#FFFFFF,stroke-width:2px
+    classDef future fill:#302515,stroke:#FFB84D,color:#FFFFFF,stroke-width:2px
 
     class A,B input
-    class C,D ai
+    class C,D vision
     class E,F,G,H data
     class I,J,K future
 ```
 
-<sub>Architecture concept: the visual-analysis pipeline is the foundation; measured energy data, digital-twin connectivity, and optimization capabilities depend on the corresponding implementation and integrations.</sub>
+<sub>Conceptual architecture. The actual digital-twin platform, integration protocol, energy-data sources, and operational capabilities depend on implementation.</sub>
 
-### The pipeline, explained
+### Architecture breakdown
 
-| Stage | Responsibility |
-|:---|:---|
-| `Input` | Accept images or video frames for analysis. |
-| `Preprocessing` | Prepare inputs consistently for downstream processing. |
-| `Computer Vision` | Extract visual features such as image brightness. |
-| `Baseline Analysis` | Establish reference values and compare observations. |
-| `Structured Results` | Organize outputs into usable metrics and metadata. |
-| `Integration Layer` | Provide a defined boundary between analysis and other systems. |
-| `Digital Twin` | Consume supported outputs to represent the relevant building or environment. |
-| `Analytics` | Present information and support interpretation. |
-| `Optimization` | Future work toward validated, data-informed recommendations. |
+<details>
+<summary><strong>01 · Visual acquisition</strong></summary>
+
+Collect supported images or video frames from the selected source. Inputs should be validated and associated with useful context, such as timestamps and asset identifiers, when available.
+
+</details>
+
+<details>
+<summary><strong>02 · Preprocessing</strong></summary>
+
+Prepare the inputs consistently for analysis. This stage can include validation, format handling, image normalization, and error handling as required by the implementation.
+
+</details>
+
+<details>
+<summary><strong>03 · Computer vision</strong></summary>
+
+Extract visual features using image-processing techniques. The initial baseline focuses on brightness-related analysis, providing a starting point for evaluating additional visual features.
+
+</details>
+
+<details>
+<summary><strong>04 · Baseline analysis</strong></summary>
+
+Calculate or evaluate relevant metrics, establish reference values, and compare observations where appropriate. The analysis must distinguish visual measurements from actual energy consumption.
+
+</details>
+
+<details>
+<summary><strong>05 · Structured output</strong></summary>
+
+Convert analysis results into a predictable data representation so they can be tested, stored, inspected, and transmitted to other components.
+
+</details>
+
+<details>
+<summary><strong>06 · Digital-twin integration</strong></summary>
+
+Use a defined integration boundary to connect validated outputs to the selected digital-twin platform. The adapter, schema, authentication, and update mechanism must be implemented and tested.
+
+</details>
+
+<details>
+<summary><strong>07 · Analytics and decision support</strong></summary>
+
+Build toward visualizing relevant observations and connecting them with independently measured energy data. Recommendations and optimization remain future capabilities until validated.
+
+</details>
 
 ---
 
-## ◈ 03 — The Core MVP
+## ◈ 02 — THE MVP
 
-### 🔬 Computer Vision Meets Energy Intelligence
+### Building the first layer of energy intelligence
 
-The initial MVP focuses on creating a dependable visual-analysis baseline rather than pretending that a single image can reveal a building's complete energy consumption.
+The MVP establishes the computer-vision foundation upon which the broader Fluxora architecture can evolve.
 
-<details open>
-<summary><strong>⚙️ Baseline brightness analysis</strong></summary>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=100&color=0:020617,50:0B2548,100:020617&text=INPUT%20%E2%86%92%20ANALYZE%20%E2%86%92%20STRUCTURE&fontColor=00D4FF&fontSize=23&animation=fadeIn" width="100%" alt="Fluxora MVP pipeline"/>
+</p>
 
-The current project structure includes a baseline-brightness module:
+### Core module 01 — Baseline brightness analysis
 
 `src/baseline_brightness.py`
 
-Its role in the architecture is to establish a reference implementation for brightness-related visual analysis.
+The baseline-brightness module is an identified component of the project. Its purpose is to provide a starting point for visual analysis.
 
-Potential applications include:
+Potential responsibilities include:
 
-- Calculating image-brightness statistics.
-- Comparing frames or images against a baseline.
-- Producing reproducible outputs for downstream analysis.
-- Establishing a starting point for additional visual features.
+- Processing image pixel values.
+- Calculating brightness-related statistics.
+- Comparing observations against reference values.
+- Providing reproducible results for downstream processing.
+- Creating a foundation for additional visual-analysis features.
 
-The exact metrics, thresholds, and implemented behavior should be verified against the source code.
+The precise metrics and calculations should be confirmed against the current source code.
 
-</details>
-
-<details>
-<summary><strong>🔄 Pipeline orchestration</strong></summary>
-
-The project structure also includes:
+### Core module 02 — Pipeline orchestration
 
 `src/run_pipeline.py`
 
-This is the pipeline entry point identified in the project. It provides the place to inspect how processing steps are initialized and executed.
+The pipeline entry point coordinates the execution of processing stages.
 
-A well-structured pipeline should make the workflow reproducible, its stages traceable, and its outputs easy to test.
+A robust implementation should aim to provide:
 
-</details>
+- Consistent input handling.
+- Clear separation between processing stages.
+- Predictable output formats.
+- Understandable error handling.
+- Reproducible execution and testing.
 
-<details>
-<summary><strong>🏙️ Digital-twin integration</strong></summary>
+### Core module 03 — Digital-twin integration
 
-The digital twin is a central architectural direction for Fluxora.
+The digital twin is a central direction for the wider Fluxora system.
 
-The intended integration boundary can carry validated analysis results, timestamps, asset identifiers, and other relevant metadata. The exact protocol and schema should be selected to match the digital-twin platform.
+The intended integration should enable structured analysis results to be associated with the relevant building, zone, or asset. The specific protocol and data model will depend on the chosen platform.
 
-The integration should not be treated as complete until data exchange, error handling, and end-to-end behavior have been tested.
+### MVP boundaries
 
-</details>
+| Capability | Status in this README |
+|---|---|
+| Baseline-brightness source module identified | Existing project component |
+| Pipeline entry point identified | Existing project component |
+| Automated evaluation and test coverage | To be verified |
+| Versioned integration contract | To be implemented or verified |
+| End-to-end digital-twin connection | Integration objective |
+| Measured energy-data correlation | Future validation work |
+| Automated energy-saving control | Future research and development |
 
-### What the MVP is — and isn't
-
-| Capability | Project position |
-|:---|:---|
-| Visual-analysis baseline | Core development focus |
-| Reproducible processing pipeline | Core development focus |
-| Structured outputs for integration | Architectural requirement |
-| Digital-twin connection | Integration objective |
-| Actual electricity-consumption measurement | Requires appropriate measurement data |
-| Automated energy-saving control | Future capability requiring validation and safeguards |
+**Important distinction:** image brightness is not electricity consumption. Camera exposure, reflections, lighting conditions, and other factors can affect visual measurements. Energy-related claims require appropriate independent measurements.
 
 ---
 
-## ◈ 04 — Technology Stack
-
-Fluxora's technology choices should support a lightweight, testable computer-vision pipeline that can evolve into a larger system.
+## ◈ 03 — THE DATA JOURNEY
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,opencv,git,github,vscode&theme=dark" alt="Python, OpenCV, Git, GitHub and VS Code technology icons"/>
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=16&duration=2200&pause=650&color=00D4FF&center=true&vCenter=true&repeat=true&width=720&height=40&lines=CAPTURE.;PROCESS.;ANALYZE.;STRUCTURE.;INTEGRATE.;VALIDATE." alt="Animated data journey"/>
 </p>
 
-| Technology | Role |
-|:---|:---|
-| **Python** | Primary language for the processing pipeline. |
-| **OpenCV** | Candidate library for image processing and computer vision, subject to the actual dependencies. |
-| **NumPy** | Candidate for numerical image and feature calculations. |
-| **Git & GitHub** | Version control, collaboration, and project documentation. |
-| **Digital-twin platform** | Target integration environment; the specific platform must be confirmed. |
-| **Visualization layer** | Future-facing presentation of insights and system status. |
+A typical intended data journey follows these stages:
 
-**Important:** The icons above illustrate the intended technical direction, not proof that every library or platform is already installed or integrated. Confirm the project's dependency files before finalizing the stack.
+1. **Observe** — receive an image or supported visual input.
+2. **Prepare** — validate and preprocess the input.
+3. **Analyze** — extract brightness-related or other implemented visual features.
+4. **Structure** — represent results using a documented output schema.
+5. **Integrate** — deliver supported outputs to a downstream system.
+6. **Validate** — compare relevant insights against independent measurements where available.
 
----
+### Example output contract
 
-## ◈ 05 — Repository Structure
-
-The following is a conceptual map based on the identified source files. It is not a claim that every directory already exists.
-
-```text
-fluxora/
-│
-├── README.md
-│
-├── src/
-│   ├── baseline_brightness.py   # Visual-analysis baseline
-│   └── run_pipeline.py          # Pipeline orchestration
-│
-├── tests/                       # Recommended: automated tests
-│
-├── data/                        # Recommended: sample or test inputs
-│
-├── outputs/                     # Recommended: generated results
-│
-├── docs/                        # Recommended: architecture and setup
-│
-└── requirements.txt              # If used by the project
-```
-
-The source paths above reflect the project files identified during development. The additional directories are recommendations; adapt this structure to the repository's actual layout.
-
----
-
-## ◈ 06 — The Data Journey
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00D4FF,100:7C3AED&height=2&section=header" width="100%" alt="Cyan to violet divider"/>
-</p>
-
-Imagine a visual input entering Fluxora.
-
-<details>
-<summary><strong>01 — Observe</strong></summary>
-
-A supported image or frame enters the pipeline. The input should have a clear source and, where appropriate, a timestamp and asset identifier.
-
-</details>
-
-<details>
-<summary><strong>02 — Process</strong></summary>
-
-Preprocessing prepares the input for analysis. Consistent processing is important when results need to be compared across different observations.
-
-</details>
-
-<details>
-<summary><strong>03 — Analyze</strong></summary>
-
-The baseline module computes or evaluates visual features. Additional metrics can be introduced as independently testable components.
-
-</details>
-
-<details>
-<summary><strong>04 — Structure**
-
-</summary>
-
-The analysis result is represented in a predictable format, making it easier to inspect, store, test, and transmit.
-
-Example of a *proposed output contract*, not a confirmed current output:
+The following is a proposed schema illustrating the type of structured result that could be used for integration. It is not a representation of a verified current pipeline output.
 
 ```json
 {
+  "schema_version": "1.0",
   "asset_id": "example-building-zone",
   "timestamp": "2026-01-01T10:00:00Z",
   "analysis_type": "baseline_brightness",
@@ -306,101 +269,84 @@ Example of a *proposed output contract*, not a confirmed current output:
     "mean_brightness": null
   },
   "metadata": {
-    "schema_version": "1.0"
+    "source_type": "image",
+    "measurement_domain": "visual"
   }
 }
 ```
 
-The metric is intentionally `null`: the actual value must come from a real analysis run. The schema and timestamp convention must be adapted to the implementation.
-
-</details>
-
-<details>
-<summary><strong>05 — Connect</strong></summary>
-
-A supported integration layer can forward validated outputs to a digital twin. The receiving platform determines the actual API, schema, authentication, and update mechanism.
-
-</details>
-
-<details>
-<summary><strong>06 — Learn & Improve</strong></summary>
-
-Future iterations can compare visual observations with independent energy measurements and evaluate whether the additional features provide meaningful, validated insight.
-
-</details>
+The actual schema should define the units, timestamp conventions, missing-value behavior, asset identifiers, and metric definitions used by the implementation.
 
 ---
 
-## ◈ 07 — What Makes Fluxora Different?
+## ◈ 04 — TECHNOLOGY STACK
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=blur&color=0:00D4FF,50:123B72,100:7C3AED&height=120&section=header&text=FROM%20PIXELS%20TO%20POSSIBILITIES&fontSize=20&fontColor=FFFFFF&animation=fadeIn" width="100%" alt="From pixels to possibilities"/>
+  <img src="https://skillicons.dev/icons?i=python,opencv,git,github,vscode&theme=dark" alt="Python, OpenCV, Git, GitHub and VS Code"/>
 </p>
 
-### 👁️ Visual context
+| Technology | Role |
+|---|---|
+| **Python** | Primary language for pipeline development |
+| **OpenCV** | Candidate library for image processing and computer vision |
+| **NumPy** | Candidate library for numerical operations |
+| **Git** | Version control |
+| **GitHub** | Repository hosting and collaboration |
+| **Digital-twin platform** | Target integration environment; platform to be confirmed |
+| **Visualization interface** | Future-facing presentation layer |
 
-Explore information that may be missing from numerical energy readings alone.
+The icons represent the intended technical direction. Confirm the repository's dependency files before treating each library as an installed dependency.
 
-### 🧠 A modular intelligence pipeline
+### Why a modular stack?
 
-Keep image processing, baseline analysis, structured outputs, and system integration as distinct responsibilities.
-
-### 🏙️ A digital-twin-first direction
-
-Design outputs with the downstream environment in mind, instead of treating the computer-vision model as an isolated endpoint.
-
-### 📊 Measurable, testable progress
-
-Establish baselines, evaluate outputs, and introduce additional intelligence only when its behavior can be validated.
-
-### 🔌 An architecture built to evolve
-
-Leave room for additional data sources, richer visual features, analytics, and decision-support capabilities without requiring every component to be built at once.
+Fluxora needs to support incremental development. Separating visual analysis from data contracts and platform integration makes it easier to test components independently and replace implementation details without redesigning the entire system.
 
 ---
 
-## ◈ 08 — Roadmap
+## ◈ 05 — REPOSITORY STRUCTURE
 
-The following roadmap describes intended milestones. Update the status of each item as implementation is verified.
+```text
+fluxora/
+│
+├── README.md
+│
+├── src/
+│   ├── baseline_brightness.py
+│   └── run_pipeline.py
+│
+├── tests/                  # Recommended: automated tests
+├── data/                   # Recommended: test inputs
+├── outputs/                # Recommended: generated results
+├── docs/                   # Recommended: system documentation
+│
+└── requirements.txt        # If used by the project
+```
 
-- [x] Establish a project-specific computer-vision baseline module.
-- [x] Identify the pipeline orchestration entry point.
-- [ ] Document the complete input/output contract.
-- [ ] Add representative test images and repeatable evaluation cases.
-- [ ] Implement automated tests for baseline behavior.
-- [ ] Define a versioned data contract for downstream systems.
-- [ ] Connect the pipeline to the selected digital-twin platform.
-- [ ] Validate the end-to-end data flow.
-- [ ] Introduce independently measured energy data where available.
-- [ ] Evaluate correlations between visual features and energy measurements.
-- [ ] Build an analytics interface for validated results.
-- [ ] Investigate data-informed recommendations and safe optimization workflows.
-
-<sub>The checked items identify source modules found in the project structure; they do not certify production readiness or passing tests.</sub>
+The two Python modules above are identified project files. The remaining directories are recommended organizational elements and may need to be created or adapted to the actual repository.
 
 ---
 
-## ◈ 09 — Get Started
+## ◈ 06 — GETTING STARTED
 
 ### Prerequisites
 
 - Python installed.
 - Git installed.
 - A local copy of the Fluxora repository.
-- The project's required Python dependencies.
+- The dependencies required by the current project.
 
-### 1. Clone the repository
+### Step 01 — Clone the repository
 
-Replace the example URL with the actual repository URL.
+Replace the placeholders with the actual repository URL and directory.
 
 ```bash
 git clone <YOUR_REPOSITORY_URL>
 cd <YOUR_REPOSITORY_DIRECTORY>
 ```
 
-### 2. Create a virtual environment
+### Step 02 — Create a virtual environment
 
-**Windows — PowerShell**
+**Windows PowerShell**
 
 ```powershell
 python -m venv .venv
@@ -414,98 +360,147 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+### Step 03 — Install dependencies
 
-If the repository contains `requirements.txt`:
+If the project contains a `requirements.txt` file:
 
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-If it does not, inspect the project imports and dependency configuration before installing packages individually.
+If no dependency file exists, inspect the imports and project configuration before installing packages individually.
 
-### 4. Inspect the pipeline
+### Step 04 — Inspect the source modules
 
-From the repository root, inspect the identified modules:
+From the correct repository root:
 
 ```powershell
 Get-Content .\src\baseline_brightness.py
 Get-Content .\src\run_pipeline.py
 ```
 
-The exact relative paths may differ depending on the repository root and folder nesting.
+If the repository contains an additional nested project directory, adjust the paths accordingly.
 
-### 5. Run the pipeline
+### Step 05 — Run the pipeline
 
-The precise invocation depends on how `run_pipeline.py` defines its entry point and input arguments. Inspect the module before running it:
+Inspect the entry point first to identify its required arguments and configuration.
 
 ```bash
 python src/run_pipeline.py
 ```
 
-If the script requires an image path, configuration file, or command-line arguments, supply those according to its implementation.
+The command is an example invocation. Actual execution may require an image path, configuration file, or other arguments defined by the script.
 
 ---
 
-## ◈ 10 — Engineering Principles
+## ◈ 07 — ENGINEERING & VALIDATION
 
-Fluxora aims to follow a few core engineering principles as it develops.
+A successful execution is only the beginning. A useful energy-intelligence system must produce results that are reproducible, interpretable, and appropriately validated.
 
-| Principle | What it means |
-|:---|:---|
-| **Reproducibility** | The same input and configuration should produce predictable results. |
-| **Modularity** | Processing, analysis, and integration should have clear boundaries. |
-| **Observability** | Errors, inputs, outputs, and pipeline stages should be traceable. |
-| **Validation** | Claims about energy performance should be supported by appropriate measurements. |
-| **Interoperability** | Structured data should be easy for downstream systems to consume. |
-| **Responsible optimization** | Future control actions must account for safety, authorization, and real-world constraints. |
+### Recommended testing checklist
 
-### Why the distinction between brightness and energy matters
-
-Image brightness is a visual property, not a direct measurement of electrical power. Camera exposure, lighting, reflections, and image processing can all affect pixel values.
-
-A reliable energy-intelligence system therefore needs a clear separation between:
-
-- **Observed features:** values extracted from images or video.
-- **Measured energy:** readings from appropriate meters or monitoring systems.
-- **Inferred insights:** conclusions evaluated against relevant data.
-- **Control decisions:** actions that require validation and suitable safeguards.
-
-This distinction is fundamental to making Fluxora useful beyond a visual demonstration.
-
----
-
-## ◈ 11 — Evaluation & Testing
-
-A meaningful MVP should demonstrate more than a successful script execution.
-
-Recommended validation checklist:
-
-- [ ] The pipeline accepts valid inputs.
+- [ ] Valid inputs are accepted.
 - [ ] Invalid or missing inputs produce understandable errors.
-- [ ] Brightness-related calculations behave as expected on controlled test images.
-- [ ] Repeated runs on identical inputs are reproducible.
-- [ ] Output values use documented units and conventions where applicable.
-- [ ] Structured results can be parsed by a downstream consumer.
-- [ ] Integration failures are handled without silently corrupting results.
-- [ ] Digital-twin updates can be verified end to end.
-- [ ] Any energy-saving claim is evaluated against a suitable baseline and independent measurements.
+- [ ] Brightness calculations behave correctly on controlled test images.
+- [ ] Repeated runs on identical inputs produce consistent outputs.
+- [ ] Metric definitions and units are documented.
+- [ ] Structured outputs conform to the documented schema.
+- [ ] Integration failures are handled safely.
+- [ ] End-to-end digital-twin data exchange is tested.
+- [ ] Energy-related conclusions are compared with independent measurements.
+- [ ] Performance and energy-saving claims are supported by reproducible evaluation.
 
-Do not publish performance numbers, accuracy claims, or energy-saving percentages until they have been measured and documented.
+### Design principles
+
+<details>
+<summary><strong>Reproducibility</strong></summary>
+
+Inputs, configurations, and processing behavior should be documented so that results can be repeated and investigated.
+
+</details>
+
+<details>
+<summary><strong>Modularity</strong></summary>
+
+Keep preprocessing, visual analysis, output generation, and integration responsibilities separate.
+
+</details>
+
+<details>
+<summary><strong>Interoperability</strong></summary>
+
+Use documented, versioned data contracts to reduce coupling between the pipeline and external systems.
+
+</details>
+
+<details>
+<summary><strong>Scientific validity</strong></summary>
+
+Separate observed visual features, measured energy consumption, inferred conclusions, and proposed control actions.
+
+</details>
+
+<details>
+<summary><strong>Responsible optimization</strong></summary>
+
+Future control capabilities should require appropriate validation, authorization, and safety constraints.
+
+</details>
 
 ---
 
-## ◈ 12 — Contributing
+## ◈ 08 — ROADMAP
 
-Fluxora is an evolving engineering project. Contributions that improve correctness, clarity, reproducibility, and integration quality are valuable.
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=100&color=0:020617,50:123B72,100:7C3AED&text=FROM%20BASELINE%20TO%20INTELLIGENCE&fontColor=FFFFFF&fontSize=19&animation=fadeIn" width="100%" alt="Fluxora development roadmap"/>
+</p>
+
+### Phase I — Foundation
+
+- [x] Identify the baseline-brightness module.
+- [x] Identify the pipeline orchestration entry point.
+- [ ] Document actual inputs, outputs, and configuration.
+- [ ] Create controlled test cases.
+- [ ] Establish repeatable evaluation procedures.
+
+### Phase II — Data & Integration
+
+- [ ] Define a versioned output contract.
+- [ ] Add structured metadata and error handling.
+- [ ] Select the digital-twin integration platform.
+- [ ] Implement the integration adapter.
+- [ ] Verify end-to-end data exchange.
+
+### Phase III — Energy Intelligence
+
+- [ ] Integrate appropriate measured energy data.
+- [ ] Evaluate relationships between visual features and energy readings.
+- [ ] Establish meaningful comparison baselines.
+- [ ] Assess additional visual-analysis features.
+- [ ] Develop analytics and visualization capabilities.
+
+### Phase IV — Intelligent Decision Support
+
+- [ ] Investigate validated energy-efficiency indicators.
+- [ ] Develop explainable, data-informed recommendations.
+- [ ] Evaluate recommendations under representative conditions.
+- [ ] Investigate safe, authorized optimization workflows.
+
+<sub>Roadmap items describe planned work. The checked foundation items identify source modules, not independently verified completion of all their intended behavior.</sub>
+
+---
+
+## ◈ 09 — CONTRIBUTING
+
+Fluxora is an evolving engineering project. Contributions that improve correctness, clarity, reproducibility, and system integration are welcome.
 
 1. Fork the repository.
-2. Create a focused feature branch.
-3. Implement a small, testable change.
+2. Create a feature branch.
+3. Make a focused, testable change.
 4. Add or update tests where appropriate.
-5. Document changes to inputs, outputs, and configuration.
-6. Submit a pull request with a clear explanation and validation results.
+5. Document changes to inputs, outputs, or configuration.
+6. Submit a pull request with a clear description and validation results.
 
 ```bash
 git checkout -b feature/your-feature
@@ -514,41 +509,50 @@ git commit -m "feat: describe your change"
 git push origin feature/your-feature
 ```
 
-Use project-approved conventions for branch names, commits, and pull requests.
+Follow the project's established contribution guidelines where available.
 
 ---
 
-## ◈ 13 — Project Status
+## ◈ 10 — PROJECT STATUS
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PHASE-MVP%20DEVELOPMENT-00D4FF?style=for-the-badge&labelColor=050816" alt="MVP development"/>
-  <img src="https://img.shields.io/badge/ARCHITECTURE-DIGITAL%20TWIN-7C3AED?style=for-the-badge&labelColor=050816" alt="Digital twin architecture"/>
+  <img src="https://img.shields.io/badge/PHASE-MVP%20DEVELOPMENT-00D4FF?style=for-the-badge&labelColor=020617" alt="MVP development"/>
+  <img src="https://img.shields.io/badge/FOCUS-COMPUTER%20VISION-7C3AED?style=for-the-badge&labelColor=020617" alt="Computer vision focus"/>
+  <img src="https://img.shields.io/badge/DIRECTION-DIGITAL%20TWIN-00C896?style=for-the-badge&labelColor=020617" alt="Digital twin direction"/>
 </p>
 
-Fluxora's development direction is to move from a focused visual-analysis baseline toward an integrated energy-intelligence workflow.
+Fluxora is being developed toward an integrated energy-intelligence workflow, starting with a computer-vision baseline and progressing toward digital-twin integration and validated energy analytics.
 
-The project should be considered a work in progress until the actual implementation, automated tests, integration, and evaluation results establish which capabilities are operational.
+Operational readiness, test coverage, integration status, and measured performance should be reported only when supported by implementation evidence.
 
 ---
 
-## ◈ 14 — The Vision
+## ◈ 11 — THE BIGGER PICTURE
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:7C3AED,35:123B72,70:00D4FF,100:050816&height=200&section=footer&text=THE%20FUTURE%20IS%20INTELLIGENT.&fontSize=25&fontColor=FFFFFF&fontAlignY=48&animation=fadeIn" width="100%" alt="Fluxora vision footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=230&color=0:020617,25:0B1F42,50:123B72,75:00D4FF,100:7C3AED&section=footer&text=SEE%20ENERGY%20DIFFERENTLY&fontSize=28&fontColor=FFFFFF&fontAlignY=40&desc=BUILDING%20THE%20FOUNDATION%20FOR%20INTELLIGENT%20ENERGY&descSize=12&descAlignY=59&animation=fadeIn" width="100%" alt="Fluxora futuristic closing banner"/>
 </p>
 
-The future of energy intelligence is not just about collecting more data. It is about understanding what that data means, connecting it to the physical world, and turning validated insights into better decisions.
+The future of energy intelligence is not simply about collecting more data. It is about understanding the relationship between information, the physical environment, and the decisions that follow.
 
-Fluxora begins with a focused computer-vision foundation and works toward a broader system in which visual observations, energy measurements, and digital twins can work together.
+Fluxora begins with a focused computer-vision foundation and works toward a broader architecture in which visual observations, measured energy data, and digital twins can work together.
 
-**One pipeline. Multiple perspectives. A smarter approach to energy.**
+Our ambition is to build a system that is not only visually compelling, but also technically sound, testable, and capable of evolving through evidence-driven engineering.
 
 <p align="center">
   <strong>⚡ FLUXORA</strong>
   <br/>
-  <sub>See energy differently.</sub>
-  <br/><br/>
-  <img src="https://img.shields.io/badge/BUILT%20WITH-CURIOSITY-00D4FF?style=flat-square&labelColor=050816" alt="Built with curiosity"/>
-  <img src="https://img.shields.io/badge/DRIVEN%20BY-INTELLIGENCE-7C3AED?style=flat-square&labelColor=050816" alt="Driven by intelligence"/>
-  <img src="https://img.shields.io/badge/DESIGNED%20FOR-IMPACT-00C896?style=flat-square&labelColor=050816" alt="Designed for impact"/>
+  <em>One pipeline. Multiple perspectives. A smarter approach to energy.</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/THINK-BEYOND%20THE%20PIXELS-00D4FF?style=flat-square&labelColor=020617" alt="Think beyond the pixels"/>
+  <img src="https://img.shields.io/badge/BUILD-WITH%20INTELLIGENCE-7C3AED?style=flat-square&labelColor=020617" alt="Build with intelligence"/>
+  <img src="https://img.shields.io/badge/ENGINEER-FOR%20IMPACT-00C896?style=flat-square&labelColor=020617" alt="Engineer for impact"/>
+</p>
+
+---
+
+<p align="center">
+  <sub>Fluxora · Computer Vision × Energy Intelligence × Digital Twins</sub>
 </p>
