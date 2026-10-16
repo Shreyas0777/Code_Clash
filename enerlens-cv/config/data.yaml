@@ -1,0 +1,11 @@
+﻿path: data/dataset
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: light_on
+  1: light_off
+  2: monitor_on
+  3: monitor_off
+  4: fan

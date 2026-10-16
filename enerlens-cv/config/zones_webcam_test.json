@@ -1,0 +1,11 @@
+﻿
+{
+  "reference_resolution": [640, 480],
+  "zones": [
+    {
+      "id": "test_light_1",
+      "type": "light",
+      "box": [225, 75, 330, 150]
+    }
+  ]
+}

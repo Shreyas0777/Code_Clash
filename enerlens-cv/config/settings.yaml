@@ -1,0 +1,31 @@
+﻿room: "lab_1"
+source: "camera_1"
+
+camera:
+  width: 1280
+  height: 720
+  process_every_n_frames: 3
+
+detection:
+  equipment_confidence: 0.40
+  person_confidence: 0.40
+  smoothing_window: 15
+
+occupancy:
+  empty_threshold_seconds: 20
+
+publishing:
+  interval_seconds: 1
+  backend_url: "http://localhost:8000/api/cv/events"
+
+fan_motion:
+  pixel_difference_threshold: 12
+  moving_pixel_ratio: 0.02
+
+model:
+  version: "yolov8n-energy-v1"
+  path: "models/best.pt"
+
+brightness:
+  off_threshold: 25
+  on_threshold: 60

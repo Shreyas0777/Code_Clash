@@ -32,3 +32,8 @@ nb_source_audit.txt
 Thumbs.db
 .idea/
 .vscode/
+
+# EnerLens CV local artifacts
+/enerlens-cv/models/*.pt
+/enerlens-cv/outputs/*
+!/enerlens-cv/outputs/.gitkeep
