@@ -1,34 +1,5 @@
-# Environments / secrets — never commit
+node_modules/
+dist/
 .env
-.venv/
-venv/
-env/
-
-# Python caches
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# Model binaries & archives — kept out of Git (see backend/artifacts/README.md)
-backend/artifacts/*
-!backend/artifacts/README.md
-backend/app/tests/fixtures/
-*.joblib
-*.pkl
-*.pickle
-*.zip
-
-# Notebooks / Colab droppings
-.ipynb_checkpoints/
-
-# Logs & local scratch
+.env.local
 *.log
-nb_source_audit.txt
-
-# OS / editor
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
