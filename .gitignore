@@ -3,3 +3,15 @@ dist/
 .env
 .env.local
 *.log
+nb_source_audit.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# EnerLens CV local artifacts
+/enerlens-cv/models/*.pt
+/enerlens-cv/outputs/*
+!/enerlens-cv/outputs/.gitkeep

@@ -1,0 +1,25 @@
+﻿{
+  "reference_resolution": [1280, 720],
+  "zones": [
+    {
+      "id": "light_1",
+      "type": "light",
+      "box": [90, 20, 330, 140]
+    },
+    {
+      "id": "light_2",
+      "type": "light",
+      "box": [520, 20, 760, 140]
+    },
+    {
+      "id": "fan_1",
+      "type": "fan",
+      "box": [860, 40, 1120, 200]
+    },
+    {
+      "id": "monitor_1",
+      "type": "monitor",
+      "box": [300, 380, 620, 600]
+    }
+  ]
+}
