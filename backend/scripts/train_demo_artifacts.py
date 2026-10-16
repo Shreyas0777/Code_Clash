@@ -1,0 +1,181 @@
+"""Generate CLEARLY-LABELED SYNTHETIC demo artifacts (NOT BDG2, NOT production).
+
+Purpose: let teammates exercise /forecast and /anomalies/detect locally before
+the real Colab export exists.  Everything written here is synthetic:
+
+- Training data is generated in-process (no dataset download).
+- ``model_config.json`` sets ``"artifact_source": "synthetic_demo_local"``,
+  ``"synthetic": true`` and ``"dataset": "SYNTHETIC_DEMO_NOT_BDG2"``.
+- ``GET /api/v1/ready`` and every model response surface that label, so demo
+  numbers can never be mistaken for real results.
+
+Usage (from the backend/ directory):
+    python scripts/train_demo_artifacts.py [--out artifacts]
+
+Before the real demo, delete these files and place the Colab export instead.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from datetime import datetime
+from pathlib import Path
+
+import joblib
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import HistGradientBoostingRegressor, IsolationForest
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+ANOMALY_FEATURES = ["energy_kwh", "hour", "day_of_week", "month"]
+FORECAST_FEATURES = [
+    "hour",
+    "day_of_week",
+    "month",
+    "lag_1",
+    "lag_24",
+    "lag_168",
+    "rolling_mean_24",
+]
+
+DATASET_LABEL = "SYNTHETIC_DEMO_NOT_BDG2"
+ARTIFACT_SOURCE = "synthetic_demo_local"
+
+
+def build_series(days: int = 120) -> pd.DataFrame:
+    """SYNTHETIC hourly series with daily/weekly/annual-style seasonality."""
+    rng = np.random.default_rng(42)
+    start = datetime(2026, 1, 5, 0, 0)  # Monday
+    hours = days * 24
+    index = pd.date_range(start=start, periods=hours, freq="h")
+    t = np.arange(hours)
+    values = (
+        120.0
+        + 30.0 * np.sin(2 * np.pi * (index.hour - 6) / 24)
+        + 12.0 * np.sin(2 * np.pi * t / 168)
+        + 6.0 * np.sin(2 * np.pi * t / (365.25 * 24 / 12))
+        + rng.normal(0, 4.0, hours)
+    )
+    values = np.clip(values, 5.0, None)  # keep strictly positive
+    return pd.DataFrame({"timestamp": index, "energy_kwh": values}).set_index("timestamp")
+
+
+def build_forecast_frame(series: pd.DataFrame) -> pd.DataFrame:
+    frame = series.copy()
+    frame["hour"] = frame.index.hour
+    frame["day_of_week"] = frame.index.dayofweek
+    frame["month"] = frame.index.month
+    frame["lag_1"] = frame["energy_kwh"].shift(1)
+    frame["lag_24"] = frame["energy_kwh"].shift(24)
+    frame["lag_168"] = frame["energy_kwh"].shift(168)
+    frame["rolling_mean_24"] = (
+        frame["energy_kwh"].shift(1).rolling(window=24, min_periods=24).mean()
+    )
+    return frame.dropna(subset=["energy_kwh"] + FORECAST_FEATURES)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--out",
+        default=str(Path(__file__).resolve().parents[1] / "artifacts"),
+        help="Output directory (default: backend/artifacts)",
+    )
+    args = parser.parse_args()
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+
+    print("=" * 72)
+    print("  SYNTHETIC DEMO ARTIFACTS — NOT TRAINED ON BDG2.")
+    print("  For local UI development only. Replace with the real Colab export")
+    print("  before presenting results. See backend/artifacts/README.md.")
+    print("=" * 72)
+
+    series = build_series()
+
+    # --- anomaly model -----------------------------------------------------
+    anomaly_frame = series.copy()
+    anomaly_frame["hour"] = anomaly_frame.index.hour
+    anomaly_frame["day_of_week"] = anomaly_frame.index.dayofweek
+    anomaly_frame["month"] = anomaly_frame.index.month
+    anomaly_frame = anomaly_frame.dropna(subset=ANOMALY_FEATURES)
+    split = int(len(anomaly_frame) * 0.8)
+    anomaly_model = IsolationForest(
+        n_estimators=200, contamination=0.02, random_state=42, n_jobs=-1
+    )
+    anomaly_model.fit(anomaly_frame.iloc[:split][ANOMALY_FEATURES])
+
+    # --- forecast model ----------------------------------------------------
+    forecast_frame = build_forecast_frame(series)
+    split = int(len(forecast_frame) * 0.8)
+    train, test = forecast_frame.iloc[:split], forecast_frame.iloc[split:]
+    forecast_model = HistGradientBoostingRegressor(
+        max_iter=200,
+        learning_rate=0.08,
+        max_leaf_nodes=20,
+        l2_regularization=1.0,
+        random_state=42,
+    )
+    forecast_model.fit(train[FORECAST_FEATURES], train["energy_kwh"])
+    preds = forecast_model.predict(test[FORECAST_FEATURES])
+    actual = test["energy_kwh"].to_numpy()
+    baseline = test["lag_24"].to_numpy()
+
+    def metrics(y, p):
+        return {
+            "MAE": float(mean_absolute_error(y, p)),
+            "RMSE": float(np.sqrt(mean_squared_error(y, p))),
+            "R2": float(r2_score(y, p)),
+        }
+
+    config = {
+        "project": "Fluxora",
+        "dataset": DATASET_LABEL,
+        "artifact_source": ARTIFACT_SOURCE,
+        "synthetic": True,
+        "note": (
+            "SYNTHETIC demo artifacts generated by scripts/train_demo_artifacts.py "
+            "on fabricated data. NOT trained on Building Data Genome Project 2. "
+            "Do not publish these metrics as model performance."
+        ),
+        "selected_meter": "SYNTHETIC_DEMO_METER",
+        "timestamp_column": "timestamp",
+        "target_column": "energy_kwh",
+        "forecast_features": FORECAST_FEATURES,
+        "anomaly_features": ANOMALY_FEATURES,
+        "anomaly_contamination": 0.02,
+        "forecast_horizon_hours": 1,
+        "data_frequency": "hourly",
+        "training_period_start": str(train.index.min()),
+        "training_period_end": str(train.index.max()),
+        "testing_period_start": str(test.index.min()),
+        "testing_period_end": str(test.index.max()),
+    }
+    metrics_payload = {
+        "note": "SYNTHETIC holdout metrics — not BDG2 performance.",
+        "dataset": DATASET_LABEL,
+        "model": metrics(actual, preds),
+        "baseline": metrics(actual, baseline),
+    }
+
+    joblib.dump(anomaly_model, out / "anomaly_model.joblib")
+    joblib.dump(forecast_model, out / "forecast_model.joblib")
+    (out / "model_config.json").write_text(json.dumps(config, indent=2), encoding="utf-8")
+    (out / "forecast_metrics.json").write_text(
+        json.dumps(metrics_payload, indent=2), encoding="utf-8"
+    )
+
+    print(f"Wrote SYNTHETIC demo artifacts to: {out}")
+    for name in (
+        "anomaly_model.joblib",
+        "forecast_model.joblib",
+        "model_config.json",
+        "forecast_metrics.json",
+    ):
+        print(f"  - {name}")
+    print("Restart the API and check GET /api/v1/ready (will disclose 'synthetic').")
+
+
+if __name__ == "__main__":
+    main()
